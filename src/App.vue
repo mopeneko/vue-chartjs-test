@@ -1,29 +1,44 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+    <div class="chart-container">
+      <ChartBar :chartData="chartData" :options="chartOption" :styles="chartStyles" />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import HelloWorld from "./components/HelloWorld.vue";
+import { Component, Vue, Prop } from "vue-property-decorator";
+import { ChartData, ChartOptions } from "chart.js";
+import ChartBar from "./components/ChartBar.vue";
 
-@Component({
-  components: {
-    HelloWorld
-  }
-})
-export default class App extends Vue {}
+@Component({ components: { ChartBar } })
+export default class App extends Vue {
+  private chartData: ChartData = {
+    labels: ["A", "B", "C", "D", "E"],
+    datasets: [
+      {
+        label: "Data One",
+        data: [1, 5, 3, 4, 3]
+      }
+    ]
+  };
+
+  private chartOption: ChartOptions = {
+    maintainAspectRatio: false
+  };
+
+  private chartStyles = {
+    height: "100%",
+    width: "100%"
+  };
+}
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.chart-container {
+  position: relative;
+  height: 40vh;
+  width: 80vw;
+  margin: 0 auto;
 }
 </style>
