@@ -7,5 +7,3 @@ services:
       dockerfile: Dockerfile-prd
     ports:
       - "8080:80"
-    volumes:
-      - /code/node_modules
